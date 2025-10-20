@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Varsha Mulangi · Full-Stack Developer</title>
+  <meta name="description" content="Full-Stack Developer specializing in secure, scalable apps · Java, Python, C#, Node, React, Spring Boot · AWS, Azure, Docker, Kubernetes, Terraform."/>
+  <meta name="theme-color" content="#6D5CE7"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
+        extend: {
+          colors: {
+            primary: '#6D5CE7', // violet
+            secondary: '#3CB9FF', // electric blue
+            mint: '#22D3A5', // teal/mint
+            ink: '#0B1220'
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(109,92,231,.25), 0 10px 30px rgba(109,92,231,.25)',
+            glass: '0 8px 28px rgba(2,8,23,.28)'
+          },
+          keyframes: {
+            floaty: { '0%,100%': { transform:'translateY(0)' }, '50%': { transform:'translateY(-8px)' } },
+            gradientShift: { '0%': { backgroundPosition:'0% 50%' }, '100%': { backgroundPosition:'200% 50%' } }
+          },
+          animation: {
+            floaty: 'floaty 7s ease-in-out infinite',
+            grad: 'gradientShift 12s linear infinite'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { color-scheme: dark light; }
+    html { scroll-behavior: smooth; }
+    .gradient-text { background: linear-gradient(90deg,#6D5CE7,#3CB9FF,#22D3A5); background-size:200% 100%;
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero-bg {
+      background-image:
+        radial-gradient(60rem 40rem at 10% -10%, rgba(109,92,231,.25), transparent 60%),
+        radial-gradient(45rem 35rem at 110% 10%, rgba(60,185,255,.25), transparent 60%),
+        radial-gradient(40rem 30rem at 50% 110%, rgba(34,211,165,.18), transparent 60%),
+        linear-gradient(180deg, #0B1220 0%, #0B1220 100%);
+    }
+    .glass { background: color-mix(in oklab, #0b1220 65%, transparent); }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: all .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .slide-l { opacity: 0; transform: translateX(-28px); transition: all .6s ease; }
+    .slide-l.visible { opacity: 1; transform: translateX(0); }
+    .slide-r { opacity: 0; transform: translateX(28px); transition: all .6s ease; }
+    .slide-r.visible { opacity: 1; transform: translateX(0); }
+    .tilt { transform-style: preserve-3d; transition: transform .18s ease, box-shadow .24s ease; }
+    .tilt:hover { transform: perspective(900px) rotateX(4deg) rotateY(-4deg) translateZ(4px); box-shadow: 0 18px 40px rgba(2,8,23,.25); }
+    .timeline { position:relative; }
+    .timeline::before { content:""; position:absolute; left:.9rem; top:0; width:2px; height:0;
+      background: linear-gradient(#6D5CE7,#3CB9FF); transition: height 1.2s ease; }
+    .timeline.visible::before { height:100%; }
+    .ring { transform: rotate(-90deg); }
+    .scrollbar { position: fixed; left: 0; top: 0; height: 3px; background: linear-gradient(90deg,#6D5CE7,#3CB9FF,#22D3A5); z-index: 60; width: 0; }
+    :where(a,button,[tabindex]):focus-visible { outline:2px solid #6D5CE7; outline-offset:3px; border-radius:.6rem; }
+  </style>
+</head>
+<body class="font-sans bg-ink text-slate-200">
+  <!-- Top progress -->
+  <div id="scrollbar" class="scrollbar"></div>
+
+  <!-- Header / Nav -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <nav class="mx-auto max-w-6xl px-4 py-4">
+      <div class="flex items-center justify-between rounded-2xl backdrop-blur-xl glass shadow-glass border border-white/5 px-4 py-2">
+        <a href="#hero" class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-primary via-secondary to-mint shadow-glow animate-floaty"></div>
+          <span class="font-extrabold tracking-tight text-lg gradient-text">Varsha</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8 text-slate-300">
+          <a href="#about" class="hover:text-white">About</a>
+          <a href="#projects" class="hover:text-white">Projects</a>
+          <a href="#experience" class="hover:text-white">Experience</a>
+          <a href="#skills" class="hover:text-white">Skills</a>
+          <a href="#contact" class="hover:text-white">Contact</a>
+        </div>
+
+        <button id="menuBtn" class="md:hidden rounded-full h-10 w-10 bg-white/10 hover:bg-white/15 flex items-center justify-center" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="hidden md:hidden mt-3 rounded-2xl glass shadow-glass border border-white/5 px-4 py-3">
+        <div class="grid gap-2 text-sm">
+          <a href="#about" class="py-2 rounded-lg hover:bg-white/5">About</a>
+          <a href="#projects" class="py-2 rounded-lg hover:bg-white/5">Projects</a>
+          <a href="#experience" class="py-2 rounded-lg hover:bg-white/5">Experience</a>
+          <a href="#skills" class="py-2 rounded-lg hover:bg-white/5">Skills</a>
+          <a href="#contact" class="py-2 rounded-lg hover:bg-white/5">Contact</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero" class="relative min-h-[92vh] flex items-center justify-center pt-28 overflow-hidden hero-bg">
+    <!-- floating orbs -->
+    <div class="pointer-events-none absolute -top-24 -left-24 w-80 h-80 rounded-full blur-3xl opacity-50 bg-primary/40 animate-floaty"></div>
+    <div class="pointer-events-none absolute -bottom-28 -right-24 w-80 h-80 rounded-full blur-3xl opacity-40 bg-secondary/40 animate-floaty" style="animation-delay:1.2s"></div>
+
+    <div class="relative z-10 w-full">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <div class="mx-auto max-w-3xl rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 via-white/5 to-white/0 backdrop-blur-xl px-6 sm:px-10 py-10 shadow-glass tilt">
+          <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+            <span class="gradient-text block mb-2">Hello, I’m</span>
+            <span id="typewriter" class="text-white"></span>
+          </h1>
+          <p class="text-lg md:text-2xl text-slate-300 mb-8">
+            I build <span class="font-semibold text-white">secure, scalable</span> apps with
+            <span class="font-semibold text-secondary">Java</span>, <span class="font-semibold text-secondary">Python</span>, <span class="font-semibold text-secondary">C#</span>, <span class="font-semibold text-secondary">Node</span>, <span class="font-semibold text-secondary">React</span>, <span class="font-semibold text-secondary">Spring Boot</span> · <span class="font-semibold text-mint">AWS</span>, <span class="font-semibold text-mint">Azure</span>, <span class="font-semibold text-mint">Docker</span>, <span class="font-semibold text-mint">Kubernetes</span>.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <!-- TODO: Add your actual CV link -->
+            <a href="images/VARSHA CHANDRAHASAREDDY.pdf" target="_blank" class="inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold text-ink bg-white hover:scale-[1.02] transition shadow-glow">⬇️ Download CV</a>
+            <a href="#projects" class="inline-flex items-center gap-2 rounded-full px-6 py-3 font-semibold text-white bg-gradient-to-r from-primary via-secondary to-mint bg-[length:200%_100%] animate-grad hover:scale-[1.02] transition shadow-glow">🚀 View Projects</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-24">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+      <div class="slide-l">
+        <h2 class="text-4xl font-extrabold mb-6 gradient-text">About Me</h2>
+        <p class="mb-6 leading-relaxed text-slate-300">
+          I’m a <span class="font-semibold text-white">Full-Stack Developer</span> with <span class="font-semibold text-white">4+ years</span> delivering production-grade systems across healthcare, finance, and academia. Strong in <span class="text-secondary font-semibold">API design</span>, <span class="text-secondary font-semibold">cloud</span> (<span class="text-mint font-semibold">AWS</span>, <span class="text-mint font-semibold">Azure</span>) and <span class="text-secondary font-semibold">DevOps</span> with <span class="text-mint font-semibold">Docker</span>, <span class="text-mint font-semibold">Kubernetes</span>, <span class="text-mint font-semibold">Terraform</span>, and CI/CD.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-4 py-2 rounded-full bg-white/5 text-slate-200">Full-Stack</span>
+          <span class="px-4 py-2 rounded-full bg-white/5 text-slate-200">Cloud & DevOps</span>
+          <span class="px-4 py-2 rounded-full bg-white/5 text-slate-200">Microservices</span>
+          <span class="px-4 py-2 rounded-full bg-white/5 text-slate-200">API Engineering</span>
+          <span class="px-4 py-2 rounded-full bg-white/5 text-slate-200">System Design</span>
+        </div>
+      </div>
+
+      <div class="slide-r">
+        <div class="relative max-w-md mx-auto">
+          <div class="rounded-3xl p-[1px] bg-gradient-to-br from-primary via-secondary to-mint shadow-glow">
+            <div class="bg-ink rounded-3xl p-6 text-center border border-white/10">
+              <img src="images/profile.jpg" alt="Varsha Mulangi profile photo"
+                   class="w-48 h-48 mx-auto object-cover rounded-full border-4 border-ink shadow-md mb-4">
+              <h4 class="text-xl font-bold mb-1 text-white">Varsha Chandrahasareddy Mulangi</h4>
+              <p class="text-slate-400">Full-Stack Developer · Cloud & AI Engineering</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-24 bg-white/5">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-4xl font-extrabold text-center mb-12 gradient-text">Projects</h2>
+
+    <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Project 1: CovidCount -->
+      <a href="https://github.com/varshamuangi/CovidCount" target="_blank"
+         class="project-card block group fade-item h-full" data-tags="viz web">
+        <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/[.07] transition tilt shadow-glass flex flex-col h-full">
+          <img src="images/covid_count.png" alt="CovidCount Dashboard" class="w-full h-44 object-cover">
+          <div class="p-5 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="font-bold text-lg group-hover:text-secondary transition-colors">
+                CovidCount — Real-time Dashboard
+              </h3>
+              <p class="text-slate-400 mt-2">
+                Built using <span class="text-secondary font-semibold">React.js</span> and
+                <span class="text-secondary font-semibold">Redux</span>, this app visualizes
+                real-time COVID-19 data using <span class="text-mint font-semibold">Chart.js</span> and REST APIs.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-4 text-sm">
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">React.js</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Redux</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Chart.js</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">REST API</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 2: Flex Living Dashboard -->
+      <a href="https://github.com/varshamuangi/flex_reviewDashboard" target="_blank"
+         class="project-card block group fade-item h-full" data-tags="web fullstack">
+        <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/[.07] transition tilt shadow-glass flex flex-col h-full">
+          <img src="images/Flex_review.png" alt="Flex Living Reviews Dashboard" class="w-full h-44 object-cover">
+          <div class="p-5 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="font-bold text-lg group-hover:text-secondary transition-colors">
+                Flex Living — Reviews Dashboard
+              </h3>
+              <p class="text-slate-400 mt-2">
+                A full-stack platform using <span class="text-secondary font-semibold">Next.js</span> and
+                <span class="text-secondary font-semibold">Express.js</span>, integrating the
+                <span class="text-mint font-semibold">Hostaway API</span> for real-time reviews and health monitoring.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-4 text-sm">
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Next.js</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Express.js</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Node.js</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Hostaway API</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 3: Interview Prep App -->
+      <a href="https://github.com/varshamuangi/Interview_prep_app" target="_blank"
+         class="project-card block group fade-item h-full" data-tags="web fullstack">
+        <div class="rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:bg-white/[.07] transition tilt shadow-glass flex flex-col h-full">
+          <img src="images/Interview_app.png" alt="Interview Prep Application" class="w-full h-44 object-cover">
+          <div class="p-5 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 class="font-bold text-lg group-hover:text-secondary transition-colors">
+                Interview Prep — Full Stack Application
+              </h3>
+              <p class="text-slate-400 mt-2">
+                Developed with <span class="text-secondary font-semibold">Angular</span> and
+                <span class="text-secondary font-semibold">Python (Flask/FastAPI)</span>, this platform helps users
+                practice coding interviews with analytics and mock evaluations.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-4 text-sm">
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Angular</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Python</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Flask / FastAPI</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">SQLAlchemy</span>
+              <span class="px-2.5 py-1 rounded-full bg-white/10 text-slate-200">Vercel</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <p class="text-center text-slate-400 mt-8">
+      Explore more on →
+      <a class="underline decoration-secondary/40 hover:text-white" href="https://github.com/varshamuangi" target="_blank">
+        github.com/varshamulangi
+      </a>
+    </p>
+  </div>
+</section>
+
+
+<!-- Extra CSS for Animation and Hover Effects -->
+<style>
+  .tilt {
+    transition: transform .35s ease, box-shadow .35s ease;
+  }
+  .tilt:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(109, 92, 231, 0.3);
+  }
+
+  .fade-item {
+    opacity: 1;
+    transform: scale(1);
+    transition: all .4s ease;
+  }
+  .fade-item.hide {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+
+  .filter-btn.active {
+    background: linear-gradient(90deg, #6D5CE7, #3CB9FF, #22D3A5);
+    color: white;
+    border: none;
+    box-shadow: 0 0 12px rgba(60, 185, 255, 0.5);
+  }
+</style>
+
+<!-- JavaScript for Interactive Filtering -->
+<script>
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const projectCards = document.querySelectorAll(".project-card");
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // update button states
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.getAttribute("data-filter");
+
+      projectCards.forEach(card => {
+        const tags = card.getAttribute("data-tags");
+        if (filter === "all" || tags.includes(filter)) {
+          card.classList.remove("hide");
+        } else {
+          card.classList.add("hide");
+        }
+      });
+    });
+  });
+</script>
+
+
+
+<!-- Experience & Education -->
+<section id="experience" class="py-24 bg-white/5">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+
+    <!-- Education -->
+    <div class="slide-l">
+      <h2 class="text-4xl font-extrabold mb-10 gradient-text">Education</h2>
+      <div class="relative timeline">
+
+        <!-- MS -->
+        <div class="relative pl-12 pb-8">
+          <div class="absolute left-2 w-4 h-4 bg-primary rounded-full"></div>
+          <div class="rounded-xl p-5 border border-white/10 bg-white/5">
+            <h4 class="font-bold text-lg">M.S. in Computer Science</h4>
+            <p class="text-secondary font-medium">Oregon State University, Corvallis, USA</p>
+            <p class="text-slate-400 text-sm">Aug 2023 – May 2025</p>
+            <p class="text-slate-300 mt-2">
+              Specialized in <span class="text-mint font-semibold">Full-Stack Development</span>, 
+              <span class="text-mint font-semibold">Cloud Engineering</span>, and 
+              <span class="text-mint font-semibold">AI Systems</span>. 
+              Designed scalable, production-ready solutions across healthcare and academic domains.
+            </p>
+          </div>
+        </div>
+
+        <!-- BE -->
+        <div class="relative pl-12">
+          <div class="absolute left-2 w-4 h-4 bg-secondary rounded-full"></div>
+          <div class="rounded-xl p-5 border border-white/10 bg-white/5">
+            <h4 class="font-bold text-lg">B.E. in Computer Science</h4>
+            <p class="text-secondary font-medium">Visvesvaraya Technological University, India</p>
+            <p class="text-slate-400 text-sm">Aug 2017 – Jul 2021</p>
+            <p class="text-slate-300 mt-2">
+              Core in <span class="text-mint font-semibold">Software Engineering</span> and 
+              <span class="text-mint font-semibold">Web Development</span> with focus on distributed systems and database design.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div class="slide-r">
+      <h2 class="text-4xl font-extrabold mb-10 gradient-text">Work Experience</h2>
+      <div class="relative timeline">
+
+        <!-- Molina -->
+        <div class="relative pl-12 pb-8">
+          <div class="absolute left-2 w-4 h-4 bg-primary rounded-full"></div>
+          <div class="rounded-xl p-5 border border-white/10 bg-white/5">
+            <h4 class="font-bold text-lg">Software Engineer</h4>
+            <p class="text-secondary font-medium">Molina Healthcare | USA</p>
+            <p class="text-slate-400 text-sm">Sep 2025 – Present</p>
+            <p class="text-slate-300 mt-2">
+              Building secure, HIPAA-compliant microservices with 
+              <span class="text-secondary font-semibold">FastAPI</span> & 
+              <span class="text-secondary font-semibold">Spring Boot</span> to process 22K+ daily healthcare transactions.  
+              Deploying on <span class="text-mint font-semibold">AWS Lambda</span> and 
+              <span class="text-mint font-semibold">Kubernetes</span>, integrating FHIR/HL7 APIs for real-time data interoperability, 
+              and enhancing CI/CD via <span class="text-mint font-semibold">Jenkins</span>, 
+              <span class="text-mint font-semibold">GitHub Actions</span>, and 
+              <span class="text-mint font-semibold">Prometheus</span>.
+            </p>
+          </div>
+        </div>
+
+        <!-- OSU -->
+        <div class="relative pl-12 pb-8">
+          <div class="absolute left-2 w-4 h-4 bg-mint rounded-full"></div>
+          <div class="rounded-xl p-5 border border-white/10 bg-white/5">
+            <h4 class="font-bold text-lg">Academic Technology Customer Service (Developer)</h4>
+            <p class="text-secondary font-medium">Oregon State University | USA</p>
+            <p class="text-slate-400 text-sm">Apr 2024 – Jun 2025</p>
+            <p class="text-slate-300 mt-2">
+              Engineered HCI simulation models in <span class="text-secondary font-semibold">Java</span> and 
+              <span class="text-secondary font-semibold">Node.js</span> supporting 500+ concurrent users.  
+              Built real-time analytics via <span class="text-mint font-semibold">Apache Kafka</span> processing 10K+ LMS logs weekly with sub-second latency.  
+              Deployed dashboards on <span class="text-mint font-semibold">AWS EKS</span> and 
+              <span class="text-mint font-semibold">Next.js</span> to optimize performance.
+            </p>
+          </div>
+        </div>
+
+        <!-- Accenture -->
+        <div class="relative pl-12 pb-8">
+          <div class="absolute left-2 w-4 h-4 bg-secondary rounded-full"></div>
+          <div class="rounded-xl p-5 border border-white/10 bg-white/5">
+            <h4 class="font-bold text-lg">Associate Software Engineer</h4>
+            <p class="text-secondary font-medium">Accenture | India</p>
+            <p class="text-slate-400 text-sm">Oct 2021 – Aug 2023</p>
+            <p class="text-slate-300 mt-2">
+              Designed enterprise platforms with 
+              <span class="text-secondary font-semibold">Django</span>, 
+              <span class="text-secondary font-semibold">Spring Boot</span>, and 
+              <span class="text-secondary font-semibold">React</span> handling 600K+ daily transactions.  
+              Built REST and GraphQL APIs, integrated C# and Python microservices, and deployed serverless workflows on 
+              <span class="text-mint font-semibold">AWS Lambda</span>.  
+              Automated CI/CD with <span class="text-mint font-semibold">Docker</span>, 
+              <span class="text-mint font-semibold">Terraform</span>, and 
+              <span class="text-mint font-semibold">Azure Kubernetes Service (AKS)</span>.
+            </p>
+          </div>
+        </div>
+
+        <!-- TATA -->
+        <div class="relative pl-12">
+          <div class="absolute left-2 w-4 h-4 bg-mint rounded-full"></div>
+          <div class="rounded-xl p-5 border border-white/10 bg-white/5">
+            <h4 class="font-bold text-lg">Software Developer</h4>
+            <p class="text-secondary font-medium">TATA Group | India</p>
+            <p class="text-slate-400 text-sm">Jul 2020 – Aug 2021</p>
+            <p class="text-slate-300 mt-2">
+              Developed real-time logistics dashboards with 
+              <span class="text-secondary font-semibold">Angular</span>, 
+              <span class="text-secondary font-semibold">Flask</span>, and 
+              <span class="text-secondary font-semibold">PostgreSQL</span>.  
+              Automated shipment tracking via Python scripts and Redis caching, reducing API latency from 2.1 s to 0.8 s.  
+              Deployed microservices on <span class="text-mint font-semibold">AWS ECS</span> maintaining 99.9% uptime.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Skills Section -->
+<section id="skills" class="py-24 bg-ink relative overflow-hidden">
+  <!-- Soft gradient background orbs -->
+  <div class="absolute inset-0 -z-10 opacity-40 blur-3xl bg-[radial-gradient(circle_at_20%_30%,rgba(109,92,231,.25),transparent_45%),radial-gradient(circle_at_80%_70%,rgba(60,185,255,.25),transparent_45%)]"></div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-center mb-16 gradient-text fade-in">Skills</h2>
+
+    <div class="grid md:grid-cols-3 gap-12 text-slate-200">
+
+      <!-- Frontend & Backend -->
+      <div class="fade-in tilt bg-white/5 border border-white/10 rounded-2xl p-8 shadow-glass">
+        <h3 class="text-xl font-bold mb-8 text-center text-white">Frontend & Backend</h3>
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <span>Java / Python / C#</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:90%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Node.js / Express.js</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:88%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>React.js / Angular / Next.js</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:85%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Spring Boot / Django / ASP.NET</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:83%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud & DevOps -->
+      <div class="fade-in tilt bg-white/5 border border-white/10 rounded-2xl p-8 shadow-glass">
+        <h3 class="text-xl font-bold mb-8 text-center text-white">Cloud & DevOps</h3>
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <span>AWS / Azure</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:88%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Docker / Kubernetes</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:86%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>CI/CD (Jenkins, GitHub Actions)</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:85%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Terraform / Infrastructure as Code</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Databases & Tools -->
+      <div class="fade-in tilt bg-white/5 border border-white/10 rounded-2xl p-8 shadow-glass">
+        <h3 class="text-xl font-bold mb-8 text-center text-white">Databases & Tools</h3>
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <span>MySQL / PostgreSQL / MongoDB</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:90%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Redis / Firebase / Oracle</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:82%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Git / Bitbucket / Azure DevOps</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:90%"></div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span>Agile / WebSockets / JWT / OAuth 2.0</span>
+            <div class="w-1/3 bg-white/10 rounded-full h-2 ml-4">
+              <div class="skill-fill" style="--width:80%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    .skill-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #6D5CE7, #3CB9FF, #22D3A5);
+      transition: width 1.6s ease-in-out;
+      box-shadow: 0 0 15px rgba(60,185,255,0.4);
+    }
+    .fade-in.visible .skill-fill { width: var(--width); }
+    .tilt { transition: transform .3s ease, box-shadow .3s ease; }
+    .tilt:hover { transform: translateY(-6px); box-shadow: 0 12px 35px rgba(60,185,255,0.25); }
+  </style>
+
+  <script>
+    // Animate progress bars on scroll
+    const skillObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll('.fade-in').forEach(el => skillObserver.observe(el));
+  </script>
+</section>
+
+
+
+
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 pointer-events-none opacity-40 blur-2xl bg-[radial-gradient(circle_at_20%_20%,rgba(109,92,231,.35),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(60,185,255,.35),transparent_45%)]"></div>
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-extrabold mb-6 gradient-text">Let’s Connect</h2>
+      <p class="text-lg text-slate-300 mb-12">Have a project or role in mind? I’d love to hear from you.</p>
+
+      <div class="grid md:grid-cols-2 gap-8 mb-10">
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6 text-left">
+          <h3 class="text-xl font-bold text-white mb-3">Get In Touch</h3>
+          <div class="space-y-2 text-slate-300">
+            <p>📧 <a href="mailto:varshamulangi21@gmail.com" class="underline decoration-secondary/40 hover:text-white">varshamulangi21@gmail.com</a></p>
+            <p>📍 United States</p>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-xl font-bold text-white mb-3">Follow Me</h3>
+          <div class="flex justify-center gap-4 mt-3">
+            <a href="https://www.linkedin.com/in/varshamulangi/" target="_blank" class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-white/10 hover:bg-white/15">LinkedIn</a>
+            <a href="https://github.com/varshamuangi" target="_blank" class="inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-white/10 hover:bg-white/15">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Form CTA -->
+      <div class="mt-6">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiej4QsDxJ1fVTDco3drcdxmwyltiwETaEGHMGvJDnnk1rQw/viewform?usp=header" target="_blank"
+           class="inline-flex items-center gap-2 rounded-full px-7 py-3 font-semibold text-ink bg-white hover:scale-[1.02] transition shadow-glow">
+          ✉️ Start a Conversation
+        </a>
+        <p class="text-slate-400 mt-3 text-sm">You’ll be redirected to a short form - I’ll reply personally to your message.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to top -->
+  <button id="backToTop" class="fixed bottom-6 right-6 hidden md:inline-flex items-center justify-center h-12 w-12 rounded-full bg-white/10 text-white border border-white/10 hover:bg-white/15 transition">↑<span class="sr-only">Back to top</span></button>
+
+  <script>
+    // Theme
+    const themeToggle = document.getElementById('themeToggle');
+    let dark = true; // default dark
+    themeToggle?.addEventListener('click', () => {
+      dark = !dark;
+      document.body.classList.toggle('bg-white', !dark);
+      document.body.classList.toggle('bg-ink', dark);
+      document.body.classList.toggle('text-slate-800', !dark);
+      document.body.classList.toggle('text-slate-200', dark);
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Intersection animations
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: .12 });
+    document.querySelectorAll('.fade-in, .slide-l, .slide-r, .timeline').forEach(el => io.observe(el));
+
+    // Scroll progress bar
+    const scrollBar = document.getElementById('scrollbar');
+    function updateScrollBar() {
+      const s = window.scrollY, h = document.body.scrollHeight - window.innerHeight;
+      scrollBar.style.width = (h > 0 ? (s / h) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', updateScrollBar, { passive: true }); updateScrollBar();
+
+    // Typewriter
+    const words = ["Varsha Chandrahasareddy Mulangi","Full-Stack Developer","Cloud & AI Engineering"];
+    let wi = 0, ci = 0, erase = false;
+    const typeEl = document.getElementById('typewriter');
+    (function type() {
+      const w = words[wi];
+      typeEl.textContent = erase ? w.slice(0, --ci) : w.slice(0, ++ci);
+      if (!erase && ci === w.length) setTimeout(() => erase = true, 900);
+      if (erase && ci === 0) { erase = false; wi = (wi + 1) % words.length; }
+      setTimeout(type, erase ? 35 : 80);
+    })();
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btt.style.display = window.scrollY > 800 ? 'inline-flex' : 'none';
+    }, { passive: true });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Skill rings animate
+    const circumference = 2 * Math.PI * 45; // r=45
+    function setRing(id, pct){ const el = document.getElementById(id); if(!el) return; el.style.strokeDasharray = circumference; el.style.strokeDashoffset = circumference * (1 - pct); }
+    const skillsSection = document.querySelector('#skills');
+    const ringIO = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setRing('r1', .90);
+          setRing('r2', .88);
+          setRing('r3', .86);
+          setRing('r4', .90);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: .3 });
+    if (skillsSection) ringIO.observe(skillsSection);
+
+    // Project filters
+    const grid = document.getElementById('projectGrid');
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.dataset.filter;
+        grid.querySelectorAll('[data-tags]').forEach(card => {
+          card.style.display = (tag === 'all' || card.dataset.tags.includes(tag)) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
